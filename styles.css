@@ -1,0 +1,274 @@
+/* styles.css
+   Mobile-first, modern minimal palette. Flexbox & Grid used.
+   Memperhatikan prefers-reduced-motion agar animasi tidak mengganggu.
+*/
+
+/* Palet modern */
+:root{
+  --bg:#0f1724;       /* deep slate */
+  --card:#0b1220;
+  --muted:#9aa6b2;
+  --accent1:#6c5ce7;  /* purple */
+  --accent2:#00b894;  /* green */
+  --surface:#0b1220;
+  --text:#e6eef6;
+  --glass: rgba(255,255,255,0.04);
+  --radius:12px;
+  --gap:1.25rem;
+  --container:1200px;
+}
+
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, var(--bg) 0%, #071023 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+  font-size:16px;
+  scroll-behavior:smooth;
+  padding-bottom:4rem;
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto; }
+}
+
+/* Container */
+.container{
+  width: min(96%, var(--container));
+  margin:0 auto;
+  padding:1.25rem 0;
+}
+
+/* Header */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:40;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(11,18,32,0.6), rgba(11,18,32,0.35));
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.header-inner{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{
+  color:var(--text);
+  font-weight:600;
+  letter-spacing:0.2px;
+  text-decoration:none;
+}
+.primary-nav ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  gap:0.5rem;
+  align-items:center;
+}
+.primary-nav a{
+  color:var(--muted);
+  text-decoration:none;
+  padding:0.6rem 0.9rem;
+  border-radius:8px;
+  transition: all 200ms ease;
+  font-size:0.95rem;
+}
+.primary-nav a:hover,
+.primary-nav a:focus{
+  color:var(--text);
+  background:var(--glass);
+  transform:translateY(-2px);
+  outline:none;
+}
+.primary-nav a.active{
+  color:var(--bg);
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 6px 20px rgba(0,0,0,0.45);
+}
+
+/* Mobile nav toggle */
+.nav-toggle{
+  display:inline-flex;
+  background:transparent;
+  border:0;
+  padding:0.4rem;
+  cursor:pointer;
+  margin-left:0.5rem;
+}
+.hamburger{
+  width:22px;
+  height:2px;
+  background:var(--text);
+  display:block;
+  position:relative;
+}
+.hamburger::before,
+.hamburger::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:2px;
+  background:var(--text);
+  transition: transform 200ms ease;
+}
+.hamburger::before{ top:-7px }
+.hamburger::after{ bottom:-7px }
+
+/* HERO */
+.hero{
+  padding:2.25rem 0;
+}
+.hero-grid{
+  display:grid;
+  gap:1.25rem;
+  align-items:center;
+}
+.hero-content .display-name{
+  margin:0 0 0.35rem 0;
+  font-size:1.45rem;
+  letter-spacing:0.2px;
+}
+.hero .lead{
+  color:var(--muted);
+  margin:0 0 1rem 0;
+}
+.cta-row .btn{ margin-right:0.5rem }
+
+/* About */
+.section { padding:2rem 0; }
+.section-title{
+  margin:0 0 1rem 0;
+  font-size:1.05rem;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--muted);
+}
+.about-grid{
+  display:grid;
+  gap:1rem;
+}
+.about-text p{ color:var(--muted) }
+.personal-info{ margin:0.5rem 0 0 0; padding-left:1rem; color:var(--muted) }
+.about-stats{ display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center }
+.stat{ background:var(--surface); padding:0.9rem 1rem; border-radius:10px; min-width:120px; text-align:center }
+.stat-number{ font-weight:700; font-size:1.1rem }
+.stat-label{ color:var(--muted); font-size:0.85rem }
+
+/* Timeline */
+.timeline{ list-style:none; padding:0; margin:0; display:grid; gap:1rem; }
+.timeline-item{ display:flex; gap:1rem; align-items:flex-start; }
+.timeline-date{ color:var(--muted); font-size:0.85rem; min-width:90px }
+.timeline-card{ background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:1rem; border-radius:10px; box-shadow:0 6px 18px rgba(2,6,23,0.6) }
+
+/* Skills */
+.skills-grid{ display:grid; gap:0.7rem; }
+.skill-card{ background:var(--surface); padding:0.85rem; border-radius:10px }
+.progress{ background:rgba(255,255,255,0.04); border-radius:999px; height:12px; overflow:hidden; margin-top:0.5rem }
+.progress-fill{
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg,var(--accent1),var(--accent2));
+  transition: width 900ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Portfolio */
+.portfolio-grid{ display:grid; gap:1rem; }
+.card{ background:var(--card); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow: 0 8px 30px rgba(2,6,23,0.6); transition: transform 200ms ease, box-shadow 200ms ease; }
+.card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.7); }
+.card-media{ height:120px; display:block; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+.card-body{ padding:0.9rem }
+.card-title{ margin:0 0 0.35rem 0 }
+.card-desc{ margin:0 0 0.5rem 0; color:var(--muted) }
+.card-actions{ display:flex; gap:0.5rem }
+
+/* Contact */
+.contact-grid{ display:grid; gap:1rem; }
+.contact-form{ background:var(--surface); padding:1rem; border-radius:10px; display:flex; flex-direction:column; gap:0.6rem }
+.contact-form label{ font-size:0.9rem; display:flex; flex-direction:column; gap:0.35rem; color:var(--muted) }
+.contact-form input, .contact-form textarea{ padding:0.6rem 0.7rem; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:var(--text) }
+.form-actions{ display:flex; gap:0.5rem; margin-top:0.5rem }
+.contact-info{ background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:1rem; border-radius:10px }
+
+/* Footer */
+.site-footer{ margin-top:2rem; padding:1rem 0; color:var(--muted) }
+.footer-inner{ display:flex; justify-content:space-between; align-items:center; gap:1rem }
+
+/* Buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.5rem 0.8rem;
+  border-radius:8px;
+  cursor:pointer;
+  background:transparent;
+  color:var(--text);
+  border:1px solid rgba(255,255,255,0.04);
+  text-decoration:none;
+  font-weight:600;
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+.btn:hover{ transform:translateY(-3px) }
+.btn.primary{ background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:var(--bg); border:0; box-shadow: 0 10px 30px rgba(108,92,231,0.12) }
+.btn.ghost{ background:transparent; color:var(--text) }
+
+/* Reveal / Animations */
+/* default hidden state */
+.reveal{ opacity:0; transform: translateY(18px); transition: opacity 600ms ease, transform 700ms cubic-bezier(.2,.9,.2,1); will-change:opacity,transform; }
+/* visible state toggled by JS */
+.reveal.visible{ opacity:1; transform:none; }
+
+/* directional slide modifiers */
+.slide-left{ transform: translateX(-18px); }
+.slide-right{ transform: translateX(18px); }
+.slide-up{ transform: translateY(24px); }
+.reveal.visible.slide-left,
+.reveal.visible.slide-right,
+.reveal.visible.slide-up {
+  transform: none;
+}
+
+/* Small helpers */
+.muted{ color:var(--muted); font-size:0.92rem }
+.card-title{ font-size:1rem }
+
+/* Responsive layout (mobile-first) */
+@media(min-width:700px){
+  .hero-grid{ grid-template-columns: 1fr 220px; align-items:center; }
+  .about-grid{ grid-template-columns: 1fr 320px; }
+  .contact-grid{ grid-template-columns: 1fr 320px; }
+  .skills-grid{ grid-template-columns: repeat(2,1fr) }
+  .portfolio-grid{ grid-template-columns: repeat(2, 1fr) }
+  .timeline{ gap:1.25rem }
+  .primary-nav{ display:block }
+  .nav-toggle{ display:none }
+}
+
+@media(min-width:1000px){
+  .portfolio-grid{ grid-template-columns: repeat(3, 1fr) }
+}
+
+/* Larger screens nav layout */
+@media(min-width:700px){
+  .primary-nav ul{ gap:0.35rem }
+}
+
+/* Focus styles for keyboard users */
+a:focus, button:focus, input:focus, textarea:focus{
+  outline: 3px solid rgba(108,92,231,0.18);
+  outline-offset:3px;
+}
+
+/* small utility */
+.hidden{ display:none !important }
